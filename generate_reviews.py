@@ -6,6 +6,7 @@ import random
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 AFFILIATE_TAG = os.getenv("AFFILIATE_TAG", "rihanqa-20")
 
+# Primary model endpoint
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
 
 CATEGORIES = ["Laptops & PC Accessories", "Audio & Headphones", "Smart Home & Lighting", "Desk Setup & Ergonomics", "Mobile & Wearables"]
@@ -18,7 +19,7 @@ def fetch_daily_affiliate_review():
     Generate a short review article. Respond ONLY with valid JSON in this exact structure:
     {{
       "title": "Catchy review title mentioning product name",
-      "date": "Today's date YYYY-MM-DD",
+      "date": "2026-11-10",
       "category": "{selected_category}",
       "summary": "2-3 sentences explaining pros and why it's worth buying.",
       "searchKeywords": "Exact brand and model name",
@@ -42,13 +43,17 @@ def fetch_daily_affiliate_review():
             item['affiliateLink'] = f"https://www.amazon.com/s?k={encoded_query}&tag={AFFILIATE_TAG}"
             return item
         else:
-            print("API Error:", response.status_code, response.text)
+            print(f"API Error ({response.status_code}): {response.text}")
             return None
     except Exception as e:
         print("Script Exception:", str(e))
         return None
 
 if __name__ == "__main__":
+    if not GEMINI_API_KEY:
+        print("Error: GEMINI_API_KEY secret is missing or empty in GitHub Secrets!")
+        exit(1)
+
     new_review = fetch_daily_affiliate_review()
     if new_review:
         data_file = "posts.json"
@@ -67,3 +72,6 @@ if __name__ == "__main__":
             json.dump(posts, f, indent=2)
 
         print(f"Successfully added: {new_review['title']}")
+    else:
+        print("Failed to generate review. Check API key permissions or quota.")
+        exit(1)
