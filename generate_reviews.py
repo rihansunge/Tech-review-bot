@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash").strip()
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip()
 TAG = os.environ.get("AFFILIATE_TAG", "").strip()
 DOMAIN = os.environ.get("AMAZON_DOMAIN", "amazon.ae").strip()
 POSTS_FILE = "posts.json"
