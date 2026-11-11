@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip()
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash").strip()
 TAG = os.environ.get("AFFILIATE_TAG", "").strip()
 DOMAIN = os.environ.get("AMAZON_DOMAIN", "amazon.ae").strip()
 POSTS_FILE = "posts.json"
@@ -54,11 +54,24 @@ req = urllib.request.Request(
     headers={"Content-Type": "application/json", "x-goog-api-key": API_KEY},
 )
 
-try:
-    with urllib.request.urlopen(req, timeout=120) as resp:
-        data = json.load(resp)
-except urllib.error.HTTPError as e:
-    sys.exit(f"Gemini API error {e.code}: {e.read().decode('utf-8', 'replace')[:500]}")
+import time
+
+data = None
+for attempt in range(4):
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = json.load(resp)
+        break
+    except urllib.error.HTTPError as e:
+        if e.code in (429, 500, 503) and attempt < 3:
+            time.sleep(20 * (attempt + 1))
+            continue
+        sys.exit(f"Gemini API error {e.code}: {e.read().decode('utf-8', 'replace')[:500]}")
+    except (TimeoutError, urllib.error.URLError) as e:
+        if attempt < 3:
+            time.sleep(20)
+            continue
+        sys.exit(f"Could not reach Gemini: {e}")
 
 try:
     cand = data["candidates"][0]
