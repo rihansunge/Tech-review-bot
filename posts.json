@@ -1,6 +1,25 @@
 [
   {
     "date": "2026-11-11",
+    "product": "Apple MacBook Air 13-inch (M3, 2024)",
+    "title": "Sleek Powerhouse for Everyday Computing",
+    "summary": "The 13-inch MacBook Air with the M3 chip is a lightweight, fanless laptop designed for general productivity, light creative work, and daily travel. It combines fast performance and long battery life in an ultra-portable design, making it well-suited for students and professionals. New features include improved graphics performance and support for up to two external displays when the lid is closed.",
+    "pros": [
+      "Exceptional battery life and fast performance",
+      "Slim, durable design with silent fanless operation",
+      "Supports two external displays with the lid closed"
+    ],
+    "cons": [
+      "Base model comes with only 8GB of unified memory",
+      "Limited port selection with only two Thunderbolt ports",
+      "Upgrading memory or storage significantly increases the price"
+    ],
+    "verdict": "The M3 MacBook Air is the top choice for anyone looking for an excellent balance of portability, speed, and battery life in a mainstream laptop.",
+    "link": "https://www.amazon.ae/s?k=Apple+2024+MacBook+Air+13+inch+M3",
+    "sources": []
+  },
+  {
+    "date": "2026-11-11",
     "product": "Bose QuietComfort Ultra Headphones",
     "title": "Top-Tier Noise Cancellation with Immersive Sound",
     "summary": "The Bose QuietComfort Ultra Headphones are flagship wireless over-ear headphones featuring elite active noise cancellation and Bose's spatial audio technology. They are ideal for frequent travelers, commuters, and daily listeners who prioritize maximum noise isolation and long-wearing comfort.",
