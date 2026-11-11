@@ -1,77 +1,101 @@
-import os
+"""Daily job: ask Gemini for one popular tech product, write a short summary,
+and add it to posts.json. Uses only the Python standard library."""
+import datetime
 import json
-import requests
-import random
+import os
+import re
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-AFFILIATE_TAG = os.getenv("AFFILIATE_TAG", "rihanqa-20")
+API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip()
+TAG = os.environ.get("AFFILIATE_TAG", "").strip()
+DOMAIN = os.environ.get("AMAZON_DOMAIN", "amazon.ae").strip()
+POSTS_FILE = "posts.json"
+MAX_POSTS = 60
 
-# Primary model endpoint
-API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
+if not API_KEY:
+    sys.exit("GEMINI_API_KEY is missing. Add it under Settings > Secrets and variables > Actions.")
 
-CATEGORIES = ["Laptops & PC Accessories", "Audio & Headphones", "Smart Home & Lighting", "Desk Setup & Ergonomics", "Mobile & Wearables"]
+try:
+    with open(POSTS_FILE, encoding="utf-8") as f:
+        posts = json.load(f)
+except (FileNotFoundError, json.JSONDecodeError):
+    posts = []
 
-def fetch_daily_affiliate_review():
-    selected_category = random.choice(CATEGORIES)
-    
-    prompt = f"""
-    Select ONE popular, real tech product in the "{selected_category}" category available on Amazon.
-    Generate a short review article. Respond ONLY with valid JSON in this exact structure:
-    {{
-      "title": "Catchy review title mentioning product name",
-      "date": "2026-11-10",
-      "category": "{selected_category}",
-      "summary": "2-3 sentences explaining pros and why it's worth buying.",
-      "searchKeywords": "Exact brand and model name",
-      "badgeText": "Short tag like 'Best Overall' or 'Top Pick'"
-    }}
-    """
+already = [p.get("product", "") for p in posts[:30]]
 
-    payload = {
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {
-            "responseMimeType": "application/json"
-        }
-    }
+prompt = f"""Pick ONE popular, well-known consumer electronics product (laptop, desk accessory,
+audio gear, monitor, keyboard, etc.) released in the last two years.
+Do NOT pick any of these products already covered: {json.dumps(already)}.
 
-    try:
-        response = requests.post(API_URL, json=payload, headers={"Content-Type": "application/json"})
-        if response.status_code == 200:
-            data = response.json()
-            item = json.loads(data['candidates'][0]['content']['parts'][0]['text'])
-            encoded_query = requests.utils.quote(item['searchKeywords'])
-            item['affiliateLink'] = f"https://www.amazon.com/s?k={encoded_query}&tag={AFFILIATE_TAG}"
-            return item
-        else:
-            print(f"API Error ({response.status_code}): {response.text}")
-            return None
-    except Exception as e:
-        print("Script Exception:", str(e))
-        return None
+Write a short, honest summary based only on what you reliably know.
+Never claim you tested the product yourself. Do not invent specs, prices, or quotes.
+If you are unsure about a detail, leave it out.
 
-if __name__ == "__main__":
-    if not GEMINI_API_KEY:
-        print("Error: GEMINI_API_KEY secret is missing or empty in GitHub Secrets!")
-        exit(1)
+Reply with ONLY a JSON object, no other text, in this shape:
+{{"product": "exact product name",
+  "title": "short post title",
+  "summary": "2-3 sentences on what it is and who it suits",
+  "pros": ["3 short points"],
+  "cons": ["2-3 short points"],
+  "verdict": "one sentence",
+  "search_query": "words to search for this product on Amazon"}}"""
 
-    new_review = fetch_daily_affiliate_review()
-    if new_review:
-        data_file = "posts.json"
-        posts = []
-        if os.path.exists(data_file):
-            try:
-                with open(data_file, "r") as f:
-                    posts = json.load(f)
-            except Exception:
-                posts = []
+body = json.dumps({
+    "contents": [{"parts": [{"text": prompt}]}],
+}).encode("utf-8")
 
-        posts.insert(0, new_review)
-        posts = posts[:20]
+url = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent"
+req = urllib.request.Request(
+    url, data=body, method="POST",
+    headers={"Content-Type": "application/json", "x-goog-api-key": API_KEY},
+)
 
-        with open(data_file, "w") as f:
-            json.dump(posts, f, indent=2)
+try:
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        data = json.load(resp)
+except urllib.error.HTTPError as e:
+    sys.exit(f"Gemini API error {e.code}: {e.read().decode('utf-8', 'replace')[:500]}")
 
-        print(f"Successfully added: {new_review['title']}")
-    else:
-        print("Failed to generate review. Check API key permissions or quota.")
-        exit(1)
+try:
+    cand = data["candidates"][0]
+    text = "".join(part.get("text", "") for part in cand["content"]["parts"])
+except (KeyError, IndexError):
+    sys.exit(f"Unexpected Gemini reply: {json.dumps(data)[:500]}")
+
+match = re.search(r"\{.*\}", text, re.DOTALL)
+if not match:
+    sys.exit(f"No JSON found in reply: {text[:500]}")
+item = json.loads(match.group(0))
+
+for key in ("product", "title", "summary", "pros", "cons", "verdict", "search_query"):
+    if not item.get(key):
+        sys.exit(f"Reply is missing '{key}'. Nothing was saved.")
+
+if item["product"].strip().lower() in [a.strip().lower() for a in already]:
+    sys.exit("Gemini picked a product that is already on the site. Nothing was saved.")
+
+query = urllib.parse.quote_plus(item["search_query"])
+link = f"https://www.{DOMAIN}/s?k={query}"
+if TAG:
+    link += f"&tag={urllib.parse.quote_plus(TAG)}"
+
+posts.insert(0, {
+    "date": datetime.date.today().isoformat(),
+    "product": item["product"],
+    "title": item["title"],
+    "summary": item["summary"],
+    "pros": item["pros"][:4],
+    "cons": item["cons"][:4],
+    "verdict": item["verdict"],
+    "link": link,
+    "sources": [],
+})
+
+with open(POSTS_FILE, "w", encoding="utf-8") as f:
+    json.dump(posts[:MAX_POSTS], f, ensure_ascii=False, indent=2)
+
+print(f"Added: {item['product']}")
