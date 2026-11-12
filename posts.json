@@ -1,5 +1,24 @@
 [
   {
+    "date": "2026-11-12",
+    "product": "Sony WF-1000XM5",
+    "title": "Sony WF-1000XM5 Wireless Earbuds",
+    "summary": "The Sony WF-1000XM5 are flagship true wireless earbuds featuring an updated driver setup and a significantly smaller, lighter form factor than the previous generation. They suit daily commuters, frequent travelers, and audio enthusiasts looking for industry-leading noise cancellation and high-resolution sound.",
+    "pros": [
+      "Exceptional active noise cancellation",
+      "Compact and lightweight ergonomic fit",
+      "Excellent sound quality with LDAC codec support"
+    ],
+    "cons": [
+      "Memory foam ear tips may feel tight for some ear shapes",
+      "Touch controls can be overly sensitive",
+      "Expensive compared to mainstream alternatives"
+    ],
+    "verdict": "The Sony WF-1000XM5 earbuds set a high standard for premium noise-canceling audio in a compact, portable design.",
+    "link": "https://www.amazon.ae/s?k=Sony+WF-1000XM5+noise+cancelling+wireless+earbuds",
+    "sources": []
+  },
+  {
     "date": "2026-11-11",
     "product": "Apple MacBook Air 13-inch (M3, 2024)",
     "title": "Sleek Powerhouse for Everyday Computing",
