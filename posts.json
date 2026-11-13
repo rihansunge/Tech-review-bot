@@ -1,5 +1,23 @@
 [
   {
+    "date": "2026-11-13",
+    "product": "Valve Steam Deck OLED",
+    "title": "The Gold Standard for Handheld PC Gaming",
+    "summary": "The Steam Deck OLED is a handheld gaming device featuring a vibrant 90Hz OLED display, improved battery efficiency, and quieter cooling compared to the original model. It is ideal for PC gamers looking to play a vast library of Steam titles on the go with comfortable ergonomics.",
+    "pros": [
+      "Vibrant 90Hz HDR OLED display with true blacks",
+      "Noticeably improved battery life and thermals",
+      "Seamless SteamOS integration and deep library support"
+    ],
+    "cons": [
+      "Relatively large and heavy compared to traditional consoles",
+      "Non-Steam titles and strict anti-cheat games can require extra setup"
+    ],
+    "verdict": "The Steam Deck OLED refines an already great hardware platform into the definitive handheld PC for most gamers.",
+    "link": "https://www.amazon.ae/s?k=Valve+Steam+Deck+OLED",
+    "sources": []
+  },
+  {
     "date": "2026-11-12",
     "product": "Sony WF-1000XM5",
     "title": "Sony WF-1000XM5 Wireless Earbuds",
