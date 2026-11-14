@@ -1,5 +1,23 @@
 [
   {
+    "date": "2026-11-14",
+    "product": "Logitech MX Keys S",
+    "title": "Logitech MX Keys S Productivity Keyboard",
+    "summary": "The Logitech MX Keys S is a premium, low-profile wireless keyboard designed for office productivity and multi-device setups. It suits professionals, writers, and multitaskers who want a quiet typing experience with customizable shortcuts. Its software integration allows users to automate repetitive tasks and switch easily between different computers.",
+    "pros": [
+      "Quiet and comfortable low-profile scissor keys",
+      "Easy switching between up to three paired devices",
+      "Customizable Smart Actions via Logi Options+ software"
+    ],
+    "cons": [
+      "Relatively high price for a membrane keyboard",
+      "Battery drains significantly faster with backlighting kept on"
+    ],
+    "verdict": "The Logitech MX Keys S is a top-tier choice for professionals looking for a refined, comfortable keyboard for multi-device productivity.",
+    "link": "https://www.amazon.ae/s?k=Logitech+MX+Keys+S+wireless+keyboard",
+    "sources": []
+  },
+  {
     "date": "2026-11-13",
     "product": "Valve Steam Deck OLED",
     "title": "The Gold Standard for Handheld PC Gaming",
