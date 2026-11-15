@@ -1,5 +1,23 @@
 [
   {
+    "date": "2026-11-15",
+    "product": "Asus ROG Ally",
+    "title": "A Powerful Windows Handheld for PC Gamers",
+    "summary": "The Asus ROG Ally is a portable gaming handheld powered by AMD Ryzen Z1 series processors and running full Windows 11. It suits gamers who want access to their entire PC library across multiple launchers like Steam, Xbox Game Pass, and Epic Games on a high-refresh-rate screen.",
+    "pros": [
+      "Vibrant 1080p 120Hz display with Variable Refresh Rate (VRR)",
+      "Runs full Windows 11 for wide compatibility with PC game launchers",
+      "Comfortable ergonomics and smooth gaming performance"
+    ],
+    "cons": [
+      "Battery life is relatively short under heavy gaming loads",
+      "Windows 11 navigation can feel clunky on a handheld touch screen"
+    ],
+    "verdict": "An impressive handheld PC that delivers great gaming performance and broad software compatibility for users who don't mind staying close to a power outlet.",
+    "link": "https://www.amazon.ae/s?k=Asus+ROG+Ally+handheld+gaming+console",
+    "sources": []
+  },
+  {
     "date": "2026-11-14",
     "product": "Logitech MX Keys S",
     "title": "Logitech MX Keys S Productivity Keyboard",
