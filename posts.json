@@ -1,5 +1,24 @@
 [
   {
+    "date": "2026-11-18",
+    "product": "Logitech MX Anywhere 3S",
+    "title": "Compact Productivity Mouse for On-the-Go Professionals",
+    "summary": "The Logitech MX Anywhere 3S is a compact wireless mouse featuring quiet click switches and an upgraded 8,000 DPI sensor that tracks on virtually any surface, including glass. It is tailored for remote workers, students, and travelers who need high-performance productivity tools in a portable footprint.",
+    "pros": [
+      "Quiet buttons significantly reduce click noise",
+      "8K DPI sensor tracks smoothly on glass and soft surfaces",
+      "Fast MagSpeed electromagnetic scroll wheel"
+    ],
+    "cons": [
+      "Logi Bolt USB receiver is sold separately",
+      "Compact size may feel cramped for larger hands",
+      "No side-tilt scrolling buttons"
+    ],
+    "verdict": "An exceptional portable mouse ideal for mobile professionals needing top-tier tracking and multi-device support on the move.",
+    "link": "https://www.amazon.ae/s?k=Logitech+MX+Anywhere+3S+wireless+mouse",
+    "sources": []
+  },
+  {
     "date": "2026-11-16",
     "product": "Apple AirPods Pro (2nd generation) with USB-C",
     "title": "Top-Tier Noise-Canceling Earbuds for Apple Users",
