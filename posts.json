@@ -1,5 +1,24 @@
 [
   {
+    "date": "2026-11-20",
+    "product": "Logitech MX Master 3S",
+    "title": "An Ergonomic Productivity Powerhouse",
+    "summary": "The Logitech MX Master 3S is a premium wireless productivity mouse featuring an ergonomic design, quiet click switches, and an 8,000 DPI sensor. It best suits professionals, power users, and creators who require multi-device switching and deep button customization.",
+    "pros": [
+      "Significantly quieter clicks than previous generations",
+      "High-precision sensor tracks on almost any surface including glass",
+      "Comfortable ergonomic contour with dual scroll wheels"
+    ],
+    "cons": [
+      "Designed exclusively for right-handed users",
+      "Relatively heavy compared to modern gaming mice",
+      "Higher price point for an office mouse"
+    ],
+    "verdict": "The Logitech MX Master 3S remains the benchmark wireless mouse for desktop productivity and creative workflows.",
+    "link": "https://www.amazon.ae/s?k=Logitech+MX+Master+3S+wireless+mouse",
+    "sources": []
+  },
+  {
     "date": "2026-11-18",
     "product": "Logitech MX Anywhere 3S",
     "title": "Compact Productivity Mouse for On-the-Go Professionals",
