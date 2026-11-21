@@ -1,5 +1,24 @@
 [
   {
+    "date": "2026-11-21",
+    "product": "Lenovo Legion Go",
+    "title": "Lenovo Legion Go: A Feature-Packed Handheld Gaming PC",
+    "summary": "The Lenovo Legion Go is a portable Windows 11 handheld gaming PC featuring a large 8.8-inch 144Hz QHD+ display and detachable controllers. It suits PC gamers who want flexible control options and high performance on a larger screen than most competing handhelds.",
+    "pros": [
+      "Vibrant 8.8-inch 144Hz QHD+ touchscreen display",
+      "Detachable controllers with a built-in FPS mouse mode",
+      "Capable gaming performance from the AMD Ryzen Z1 Extreme processor"
+    ],
+    "cons": [
+      "Noticeably bulkier and heavier than typical handheld devices",
+      "Battery life drains quickly during intense gaming sessions",
+      "Windows 11 interface can be clunky on a touchscreen handheld"
+    ],
+    "verdict": "The Lenovo Legion Go delivers impressive performance and a standout screen for mobile PC gaming, though its larger footprint and short battery life require some compromise.",
+    "link": "https://www.amazon.ae/s?k=Lenovo+Legion+Go+handheld+gaming+PC",
+    "sources": []
+  },
+  {
     "date": "2026-11-20",
     "product": "Logitech MX Master 3S",
     "title": "An Ergonomic Productivity Powerhouse",
